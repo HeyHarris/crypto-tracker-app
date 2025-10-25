@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 	"time"
 
 	"github.com/gorilla/mux"
@@ -82,7 +83,6 @@ func jsonContentTypeMiddleware(next http.Handler) http.Handler {
 func getUsers(db *sql.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
-		var userTable User
 		rows, err := db.Query("SELECT * FROM users")
 		if err != nil {
 			w.WriteHeader(http.StatusNotFound)
@@ -92,18 +92,18 @@ func getUsers(db *sql.DB) http.HandlerFunc {
 		usersList := []User{}
 		for rows.Next() {
 			var user User
-			if err := rows.Scan(&userTable.Id, &userTable.Name, &userTable.Email, &userTable.CreateTimestamp); err != nil {
+			if err := rows.Scan(&user.Id, &user.Name, &user.Email, &user.CreateTimestamp); err != nil {
 				log.Fatal(err)
 			}
-			if user.Name != "" && user.Email != "" {
-				usersList = append(usersList, user)
-			}
+
+			usersList = append(usersList, user)
+
 		}
 		if err := rows.Err(); err != nil {
 			log.Fatal(err)
 		}
 
-		json.NewEncoder(w).Encode(userTable)
+		json.NewEncoder(w).Encode(usersList)
 	}
 }
 
@@ -111,12 +111,19 @@ func getUsers(db *sql.DB) http.HandlerFunc {
 func getUser(db *sql.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		pathVariables := mux.Vars(r)
-		id := pathVariables["id"]
+		idStr := pathVariables["id"]
 
-		var userTable User
-		err := db.QueryRow("SELECT * FROM users WHERE id = $1", id).Scan(&userTable.Id, &userTable.Name, &userTable.Email, &userTable.CreateTimestamp)
+		id, err := strconv.Atoi(idStr)
 		if err != nil {
-			w.WriteHeader(http.StatusNotFound)
+			http.Error(w, "invalid id format — must be an integer", http.StatusBadRequest)
+			return
+		}
+		var userTable User
+		err = db.QueryRow("SELECT * FROM users WHERE id = $1", id).Scan(&userTable.Id, &userTable.Name, &userTable.Email, &userTable.CreateTimestamp)
+		if err != nil {
+			var errorString string = "User with Id of " + strconv.Itoa(id) + " not found in our records!"
+			http.Error(w, errorString, http.StatusNotFound) // better way, you can also put custom error message
+			// w.WriteHeader(http.StatusNotFound) //Will Add a HTTP response code in header
 			return
 		}
 		json.NewEncoder(w).Encode(userTable)
@@ -125,25 +132,71 @@ func getUser(db *sql.DB) http.HandlerFunc {
 
 // create user
 func createUser(db *sql.DB) http.HandlerFunc {
+	type usersRequest struct {
+		Name  any `json:"name"`
+		Email any `json:"email"`
+	}
+
 	return func(w http.ResponseWriter, r *http.Request) {
-		var userRequest User
-
-		if err := json.NewDecoder(r.Body).Decode(&userRequest); err != nil {
-			log.Fatal(err)
-			http.Error(w, "invalid JSON body", http.StatusBadRequest)
+		var body usersRequest
+		dec := json.NewDecoder(r.Body)
+		dec.DisallowUnknownFields()
+		if err := dec.Decode(&body); err != nil {
+			http.Error(w, "invalid JSON: "+err.Error(), http.StatusBadRequest)
 			return
 		}
 
-		if userRequest.Name == "" || userRequest.Email == "" {
-			http.Error(w, "name and email are required", http.StatusBadRequest)
+		// Validate that Name and Email are Strings
+		var name string
+		switch v := body.Name.(type) {
+		case string:
+			name = v
+		case float64: // JSON numbers decode to float64
+			http.Error(w, "Name must be a string", http.StatusBadRequest)
+			return
+		case nil:
+			http.Error(w, "Name is Required", http.StatusBadRequest)
+			return
+		default:
+			http.Error(w, "Name must be a string", http.StatusBadRequest)
 			return
 		}
-		err := db.QueryRow("INSERT INTO users (name, email) VALUES ($1, $2) RETURNING id", userRequest.Name, userRequest.Email).Scan(&userRequest.Id)
-		if err != nil {
-			log.Fatal(err)
+
+		// Coerce name to string (or reject if you prefer)
+		var email string
+		switch v := body.Email.(type) {
+		case string:
+			email = v
+		case float64: // JSON numbers decode to float64
+			http.Error(w, "email must be a string", http.StatusBadRequest)
+			return
+		case nil:
+			http.Error(w, "Email is Required", http.StatusBadRequest)
+			return
+		default:
+			http.Error(w, "Email must be a string", http.StatusBadRequest)
 			return
 		}
+
+		if name == "" || email == "" {
+			http.Error(w, "Name and Email are required", http.StatusBadRequest)
+			return
+		}
+
+		var user User
+		user.Name = name
+		user.Email = email
+
+		if err := db.QueryRow(
+			"INSERT INTO users (name, email) VALUES ($1, $2) RETURNING id, createTimestamp",
+			user.Name, user.Email,
+		).Scan(&user.Id, &user.CreateTimestamp); err != nil {
+			log.Printf("insert error: %v", err)
+			http.Error(w, "failed to create user", http.StatusInternalServerError)
+			return
+		}
+
 		w.WriteHeader(http.StatusCreated)
-		json.NewEncoder(w).Encode(userRequest)
+		_ = json.NewEncoder(w).Encode(user)
 	}
 }
