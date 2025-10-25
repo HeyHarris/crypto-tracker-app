@@ -1,0 +1,81 @@
+{
+	"info": {
+		"_postman_id": "27630977-770271a2-23b6-4de9-9baf-9af4d87ee9fa",
+		"name": "crypto_tracker go",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "USER BY ID",
+			"id": "27630977-3569a810-6ae0-4e3e-9695-dc61d99a818e",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{localhost_api}}/users",
+					"host": [
+						"{{localhost_api}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ALL USERS",
+			"id": "27630977-97f81794-dcf5-4423-bea3-8d40802ab468",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{localhost_api}}/users",
+					"host": [
+						"{{localhost_api}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "USER",
+			"id": "27630977-25084c4a-9231-4336-8fc6-9ee6ff32c4f0",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Valerie Flores\",\r\n    \"email\" : \"valerie.25.flores@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localhost_api}}/users",
+					"host": [
+						"{{localhost_api}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
