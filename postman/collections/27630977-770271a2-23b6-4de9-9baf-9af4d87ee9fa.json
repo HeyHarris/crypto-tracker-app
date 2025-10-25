@@ -15,12 +15,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{localhost_api}}/users",
+					"raw": "{{localhost_api}}/users/4",
 					"host": [
 						"{{localhost_api}}"
 					],
 					"path": [
-						"users"
+						"users",
+						"4"
 					]
 				}
 			},
