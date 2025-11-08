@@ -9,7 +9,7 @@
 			"name": "Coin Market Api",
 			"item": [
 				{
-					"name": "Latest",
+					"name": "Latest Quotes",
 					"id": "27630977-3967312d-2281-4a99-a010-5d5839fac5e8",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
