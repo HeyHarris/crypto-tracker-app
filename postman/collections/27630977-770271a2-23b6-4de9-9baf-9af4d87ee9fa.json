@@ -29,14 +29,16 @@
 							}
 						],
 						"url": {
-							"raw": "{{coinMarket}}/cryptocurrency/listings/latest",
+							"raw": "{{coinMarket}}/content/latest/v1/key/info",
 							"host": [
 								"{{coinMarket}}"
 							],
 							"path": [
-								"cryptocurrency",
-								"listings",
-								"latest"
+								"content",
+								"latest",
+								"v1",
+								"key",
+								"info"
 							]
 						}
 					},
