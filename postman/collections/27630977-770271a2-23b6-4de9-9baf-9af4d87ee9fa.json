@@ -16,7 +16,13 @@
 					},
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "{{coinMarket}}",
+							"host": [
+								"{{coinMarket}}"
+							]
+						}
 					},
 					"response": []
 				}
