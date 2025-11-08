@@ -10,7 +10,20 @@
 			"item": [
 				{
 					"name": "Coin Market Gateway",
-					"item": [],
+					"item": [
+						{
+							"name": "New Request",
+							"id": "27630977-2b6a02d3-5177-4b22-8f05-64c161be557a",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						}
+					],
 					"id": "27630977-b87b14e4-0899-40f8-9e40-f1bd60edaeb2"
 				},
 				{
