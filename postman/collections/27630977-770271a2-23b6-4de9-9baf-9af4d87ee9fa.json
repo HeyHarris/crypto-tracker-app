@@ -70,13 +70,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{localhost_api}}/users/4",
+							"raw": "{{localhost_api}}/users/5",
 							"host": [
 								"{{localhost_api}}"
 							],
 							"path": [
 								"users",
-								"4"
+								"5"
 							]
 						}
 					},
