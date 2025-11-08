@@ -12,14 +12,29 @@
 					"name": "Coin Market Gateway",
 					"item": [
 						{
-							"name": "New Request",
+							"name": "Get Quote By Symbol",
 							"id": "27630977-2b6a02d3-5177-4b22-8f05-64c161be557a",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "{{localhost_api}}/coin?symbol=SOL",
+									"host": [
+										"{{localhost_api}}"
+									],
+									"path": [
+										"coin"
+									],
+									"query": [
+										{
+											"key": "symbol",
+											"value": "SOL"
+										}
+									]
+								}
 							},
 							"response": []
 						}
