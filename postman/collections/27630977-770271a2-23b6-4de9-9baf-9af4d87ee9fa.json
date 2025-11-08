@@ -6,77 +6,180 @@
 	},
 	"item": [
 		{
-			"name": "USER BY ID",
-			"id": "27630977-3569a810-6ae0-4e3e-9695-dc61d99a818e",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{localhost_api}}/users/4",
-					"host": [
-						"{{localhost_api}}"
-					],
-					"path": [
-						"users",
-						"4"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "ALL USERS",
-			"id": "27630977-97f81794-dcf5-4423-bea3-8d40802ab468",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{localhost_api}}/users",
-					"host": [
-						"{{localhost_api}}"
-					],
-					"path": [
-						"users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "USER",
-			"id": "27630977-25084c4a-9231-4336-8fc6-9ee6ff32c4f0",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\" : \"Valerie Flores\",\r\n    \"email\" : \"valerie.25.flores@gmail.com\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Internal",
+			"item": [
+				{
+					"name": "Coin Market Gateway",
+					"item": [
+						{
+							"name": "Get Quote By Symbol",
+							"id": "27630977-2b6a02d3-5177-4b22-8f05-64c161be557a",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost_api}}/coin?symbol=SOL",
+									"host": [
+										"{{localhost_api}}"
+									],
+									"path": [
+										"coin"
+									],
+									"query": [
+										{
+											"key": "symbol",
+											"value": "SOL"
+										}
+									]
+								}
+							},
+							"response": []
 						}
-					}
-				},
-				"url": {
-					"raw": "{{localhost_api}}/users",
-					"host": [
-						"{{localhost_api}}"
 					],
-					"path": [
-						"users"
-					]
+					"id": "27630977-b87b14e4-0899-40f8-9e40-f1bd60edaeb2"
+				},
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "USER BY ID",
+							"id": "27630977-3569a810-6ae0-4e3e-9695-dc61d99a818e",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost_api}}/users/5",
+									"host": [
+										"{{localhost_api}}"
+									],
+									"path": [
+										"users",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ALL USERS",
+							"id": "27630977-97f81794-dcf5-4423-bea3-8d40802ab468",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost_api}}/users",
+									"host": [
+										"{{localhost_api}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "USER",
+							"id": "27630977-25084c4a-9231-4336-8fc6-9ee6ff32c4f0",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\" : \"Valerie Flores\",\r\n    \"email\" : \"valerie.25.flores@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost_api}}/users",
+									"host": [
+										"{{localhost_api}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "27630977-af18dd51-ed26-49a5-bf12-8386f14a0494"
 				}
-			},
-			"response": []
+			],
+			"id": "27630977-f8d1d2b7-615f-4005-85fe-e4af40b64e89"
+		},
+		{
+			"name": "External",
+			"item": [
+				{
+					"name": "Coin Market Api",
+					"item": [
+						{
+							"name": "Latest Quotes",
+							"id": "27630977-3967312d-2281-4a99-a010-5d5839fac5e8",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Encoding",
+										"value": "deflate, gzip",
+										"type": "text"
+									},
+									{
+										"key": "X-CMC_PRO_API_KEY",
+										"value": "{{coinMarketToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{coinMarket}}/v1/cryptocurrency/quotes/latest?symbol=SOL",
+									"host": [
+										"{{coinMarket}}"
+									],
+									"path": [
+										"v1",
+										"cryptocurrency",
+										"quotes",
+										"latest"
+									],
+									"query": [
+										{
+											"key": "symbol",
+											"value": "SOL"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "27630977-26e6c69e-7032-4386-800a-a9699c24e595"
+				}
+			],
+			"id": "27630977-446af2a2-9eb0-4eab-8847-189ed79f7514"
 		}
 	]
 }
