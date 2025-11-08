@@ -23,6 +23,11 @@
 								"type": "text"
 							},
 							{
+								"key": "Accept-Encoding",
+								"value": "deflate, gzip",
+								"type": "text"
+							},
+							{
 								"key": "X-CMC_PRO_API_KEY",
 								"value": "{{coinMarketToken}}",
 								"type": "text"
