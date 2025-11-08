@@ -6,6 +6,24 @@
 	},
 	"item": [
 		{
+			"name": "New Folder",
+			"item": [
+				{
+					"name": "New Request",
+					"id": "27630977-3967312d-2281-4a99-a010-5d5839fac5e8",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			],
+			"id": "27630977-26e6c69e-7032-4386-800a-a9699c24e595"
+		},
+		{
 			"name": "USER BY ID",
 			"id": "27630977-3569a810-6ae0-4e3e-9695-dc61d99a818e",
 			"protocolProfileBehavior": {
