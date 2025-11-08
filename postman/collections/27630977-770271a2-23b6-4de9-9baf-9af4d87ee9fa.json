@@ -18,9 +18,13 @@
 						"method": "GET",
 						"header": [
 							{
+								"key": "Accepts",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
 								"key": "X-CMC_PRO_API_KEY",
 								"value": "{{coinMarketToken}}",
-								"description": "api_key",
 								"type": "text"
 							}
 						],
