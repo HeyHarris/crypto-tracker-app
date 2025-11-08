@@ -137,9 +137,14 @@
 			"id": "27630977-af18dd51-ed26-49a5-bf12-8386f14a0494"
 		},
 		{
-			"name": "New Folder",
+			"name": "Coin Market Gateway",
 			"item": [],
 			"id": "27630977-b87b14e4-0899-40f8-9e40-f1bd60edaeb2"
+		},
+		{
+			"name": "Internal",
+			"item": [],
+			"id": "27630977-f8d1d2b7-615f-4005-85fe-e4af40b64e89"
 		}
 	]
 }
