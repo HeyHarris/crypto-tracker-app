@@ -34,14 +34,15 @@
 							}
 						],
 						"url": {
-							"raw": "{{coinMarket}}/cryptocurrency/listings/latest",
+							"raw": "{{coinMarket}}/v2/cryptocurrency/price-performance-stats/latest ",
 							"host": [
 								"{{coinMarket}}"
 							],
 							"path": [
+								"v2",
 								"cryptocurrency",
-								"listings",
-								"latest"
+								"price-performance-stats",
+								"latest "
 							]
 						}
 					},
