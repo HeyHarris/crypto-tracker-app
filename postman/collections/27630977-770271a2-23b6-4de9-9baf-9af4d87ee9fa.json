@@ -34,15 +34,21 @@
 							}
 						],
 						"url": {
-							"raw": "{{coinMarket}}/v1/cryptocurrency/listings/latest",
+							"raw": "{{coinMarket}}/v1/cryptocurrency/quotes/latest?symbol=SOL",
 							"host": [
 								"{{coinMarket}}"
 							],
 							"path": [
 								"v1",
 								"cryptocurrency",
-								"listings",
+								"quotes",
 								"latest"
+							],
+							"query": [
+								{
+									"key": "symbol",
+									"value": "SOL"
+								}
 							]
 						}
 					},
