@@ -16,11 +16,23 @@
 					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "X-CMC_PRO_API_KEY",
+								"value": "{{coinMarketToken}}",
+								"description": "api_key",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "{{coinMarket}}",
+							"raw": "{{coinMarket}}/cryptocurrency/listings/latest",
 							"host": [
 								"{{coinMarket}}"
+							],
+							"path": [
+								"cryptocurrency",
+								"listings",
+								"latest"
 							]
 						}
 					},
