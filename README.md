@@ -34,3 +34,12 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## How to start locally
+1. First start Docker Desktop Engine
+2. Start DB container with, docker compose up -d db
+3. Start Go App Container with,  docker compose up -d crypto_tracker
+4. Check status of containers with, docker ps -a
+5. Open Powershell/terminal and open postgres terminal to query the tables directly with, docker exec -it db psql -U **username** -d **db_name**
+6. cd into /frontend and run npm run dev to start Next.js front end app
+7. Head to http://localhost:**port** to see app locally. 
